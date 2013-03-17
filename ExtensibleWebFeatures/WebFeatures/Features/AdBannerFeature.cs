@@ -1,9 +1,9 @@
-namespace WebFeatures
+namespace WebFeatures.Features
 {
-    using Infrastructure;
+    using WebFeatures.Infrastructure;
 
-    [WebFeatureExport("WebChat")]
-    public class WebChatFeature : BaseWebFeature
+    [WebFeatureExport("AdBanner")]
+    public class AdBannerFeature : BaseWebFeature
     {
         protected override void ConfigureFeature()
         {

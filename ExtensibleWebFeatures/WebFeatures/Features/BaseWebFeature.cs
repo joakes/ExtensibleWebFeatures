@@ -1,9 +1,10 @@
-﻿namespace WebFeatures.Infrastructure
+﻿namespace WebFeatures.Features
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Reflection;
     using System.Text.RegularExpressions;
+    using Infrastructure;
 
     public abstract class BaseWebFeature : IWebFeature, IPartImportsSatisfiedNotification
     {
@@ -29,7 +30,7 @@
         {
             var type = GetType();
             var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-            var controlNamespace = type.Namespace + ".UserControls";
+            var controlNamespace = Regex.Replace(type.Namespace, Regex.Escape(".Features"), string.Empty) + ".UserControls";
             var controlClassName = Regex.Replace(type.Name, "Feature", string.Empty);
 
             Pages = new List<string>();
