@@ -58,11 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\AdBannerFeature.cs" />
-    <Compile Include="Infrastructure\FilterWebFeature.cs" />
+    <Compile Include="Infrastructure\FindWebFeature.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
-    <Compile Include="UserControls\BaseWebFeatureControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Features\BaseWebFeature.cs" />
     <Compile Include="Infrastructure\FeatureConfiguration.cs" />
     <Compile Include="Infrastructure\IWebFeature.cs" />

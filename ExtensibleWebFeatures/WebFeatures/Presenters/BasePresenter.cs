@@ -6,7 +6,7 @@
     public abstract class BasePresenter : IPartImportsSatisfiedNotification
     {
         [Import]
-        private IFilterWebFeature _filterWebFeature;
+        private IFindWebFeature _findWebFeature;
         protected IWebFeature WebFeature;
 
         protected BasePresenter()
@@ -18,7 +18,7 @@
 
         public void OnImportsSatisfied()
         {
-            WebFeature = _filterWebFeature.GetSpecificWebFeature(GetType().Name);
+            WebFeature = _findWebFeature.GetSpecificWebFeature(GetType().Name);
         }
     }
 }

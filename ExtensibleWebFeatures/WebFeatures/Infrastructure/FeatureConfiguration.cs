@@ -61,15 +61,16 @@
             var root = doc.Root;
             var features = from feature in root.Elements("feature")
                        let props = feature.Descendants("property")
-                       select new Feature {
-                                      Name = feature.Attribute("name").Value,
-                                      Enabled = ToBool(feature.Attribute("enabled").Value),
-                                      Properties = props.Select(x => 
-                                          new KeyValuePair<string, string>(
-                                              x.Attribute("key").Value, 
-                                              x.Attribute("value").Value))
-                                              .ToList()
-                                  };
+                       select new Feature 
+                            {
+                                Name = feature.Attribute("name").Value,
+                                Enabled = ToBool(feature.Attribute("enabled").Value),
+                                Properties = props.Select(x => 
+                                    new KeyValuePair<string, string>(
+                                        x.Attribute("key").Value, 
+                                        x.Attribute("value").Value))
+                                        .ToList()
+                            };
 
             config.Features = features.ToList();
             return config;

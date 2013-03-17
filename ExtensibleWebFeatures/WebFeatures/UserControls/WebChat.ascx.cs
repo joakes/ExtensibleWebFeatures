@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Web.UI;
 
 namespace WebFeatures.UserControls
 {
     using Presenters;
     using Views;
     
-    public partial class WebChat : BaseWebFeatureControl, IWebChatView
+    public partial class WebChat : UserControl, IWebChatView
     {
         private readonly WebChatPresenter _webChatPresenter;
 
