@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<features>
+  <feature name="WebChat" enabled="True">
+      <property key="Url" value="http://www.google.com.au" />
+  </feature>
+  <feature name="AdBanner" enabled="True" />
+</features>
