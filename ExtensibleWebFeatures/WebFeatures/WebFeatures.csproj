@@ -58,12 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdBannerFeature.cs" />
-    <Compile Include="Infrastructure\BaseWebFeatureControl.cs">
+    <Compile Include="Infrastructure\FilterWebFeature.cs" />
+    <Compile Include="Presenters\BasePresenter.cs" />
+    <Compile Include="UserControls\BaseWebFeatureControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Infrastructure\BaseWebFeature.cs" />
     <Compile Include="Infrastructure\FeatureConfiguration.cs" />
-    <Compile Include="Infrastructure\IFeatureConfiguration.cs" />
     <Compile Include="Infrastructure\IWebFeature.cs" />
     <Compile Include="Infrastructure\WebFeatureManager.cs" />
     <Compile Include="UserControls\AdBanner.ascx.cs">
@@ -73,6 +74,8 @@
     <Compile Include="UserControls\AdBanner.ascx.designer.cs">
       <DependentUpon>AdBanner.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\WebChatPresenter.cs" />
+    <Compile Include="Views\IWebChatView.cs" />
     <Compile Include="WebChatFeature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\WebChat.ascx.cs">
@@ -93,6 +96,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

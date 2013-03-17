@@ -103,4 +103,10 @@
         public bool Enabled { get; set; }
         public List<KeyValuePair<string, string>> Properties { get; set; }
     }
+
+    public interface IFeatureConfiguration
+    {
+        bool IsFeatureEnabled(string featureName);
+        T GetProperty<T>(string featureName, string propertyName);
+    }
 }

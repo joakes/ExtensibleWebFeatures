@@ -28,6 +28,11 @@
             }
         }
 
+        public static void ComposeParts(object obj)
+        {
+            container.ComposeParts(obj);
+        }
+
         public static IWebFeature GetWebFeature(string featureName)
         {
             return container.GetExports<IWebFeature, IFeatureMetadata>()

@@ -2,13 +2,26 @@
 
 namespace WebFeatures.UserControls
 {
-    using Infrastructure;
-
-    public partial class WebChat : BaseWebFeatureControl
+    using Presenters;
+    using Views;
+    
+    public partial class WebChat : BaseWebFeatureControl, IWebChatView
     {
-        protected void Page_Load(object sender, EventArgs e)
+        private readonly WebChatPresenter _webChatPresenter;
+
+        public WebChat()
         {
-            var value = WebFeature.GetProperty<string>("Url");
+            _webChatPresenter = new WebChatPresenter(this);
+        }
+        
+        private void Page_Load(object sender, EventArgs e)
+        {
+            _webChatPresenter.OnPageLoad(IsPostBack);
+        }
+
+        public string ChatUrl
+        {
+            set { ChatAnchor.Attributes["href"] = value; }
         }
     }
 }
