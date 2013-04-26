@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" %>
+<%@ Import Namespace="System.Web.Optimization" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <title></title>
+        <asp:ContentPlaceHolder id="Title" runat="server">
+            </asp:ContentPlaceHolder>
+        
+        <%: Styles.Render("~/Content/less") %>
+    </head>
+    <body>
+        <form id="form1" runat="server">
+            <div>
+                <asp:ContentPlaceHolder id="Content" runat="server">
+        
+                </asp:ContentPlaceHolder>
+                <%--<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>--%>
+                <asp:ScriptManager runat="server" LoadScriptsBeforeUI="False"/>
+            </div>
+        </form>
+    </body>
+</html>

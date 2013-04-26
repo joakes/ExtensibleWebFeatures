@@ -13,10 +13,5 @@ namespace WebFeatures.UserControls
         {
 
         }
-
-        protected string AdBannerImage
-        {
-            get { return "http://www.economypaper.com/images/banner_placeholder.jpg"; }
-        }
     }
 }

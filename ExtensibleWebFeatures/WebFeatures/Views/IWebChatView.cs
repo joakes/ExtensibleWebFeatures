@@ -1,6 +1,6 @@
 ﻿namespace WebFeatures.Views
 {
-    public interface IWebChatView
+    public interface IWebChatView : IWebView
     {
         string ChatUrl { set; }
     }

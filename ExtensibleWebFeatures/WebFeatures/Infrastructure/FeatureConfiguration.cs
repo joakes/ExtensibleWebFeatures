@@ -18,7 +18,7 @@
         public FeatureConfiguration()
         {
             _configFileName = Assembly.GetExecutingAssembly().GetName().Name.ToLowerInvariant() + ".xml";
-            _featureConfig = ReadFeatureConfig();
+            _featureConfig = InitialiseFeatureConfigFromXml();
         }
 
         public bool IsFeatureEnabled(string featureName)
@@ -52,7 +52,7 @@
             }
         }
 
-        private FeatureConfig ReadFeatureConfig()
+        private FeatureConfig InitialiseFeatureConfigFromXml()
         {
             var config = new FeatureConfig();
             var configFilePath = HttpContext.Current.Server.MapPath(@"./bin/" + _configFileName);
@@ -60,26 +60,34 @@
 
             var root = doc.Root;
             var features = from feature in root.Elements("feature")
-                       let props = feature.Descendants("property")
-                       select new Feature 
-                            {
-                                Name = feature.Attribute("name").Value,
-                                Enabled = ToBool(feature.Attribute("enabled").Value),
-                                Properties = props.Select(x => 
-                                    new KeyValuePair<string, string>(
-                                        x.Attribute("key").Value, 
-                                        x.Attribute("value").Value))
-                                        .ToList()
-                            };
-
+                           let props = feature.Descendants("property")
+                           select CreateFeatureFromXDoc(feature, props);
+            
             config.Features = features.ToList();
             return config;
         }
 
-        private static bool ToBool(string value)
+        private Feature CreateFeatureFromXDoc(XElement featureNode, IEnumerable<XElement> propertiesNode)
         {
-            bool result;
-            return bool.TryParse(value, out result) && result;
+            Func<string, bool> toBool = val => 
+                {
+                    bool result;
+                    return bool.TryParse(val, out result) && result;
+                };
+
+            var properties = propertiesNode.Select(x =>
+                                 new KeyValuePair<string, string>(
+                                    x.Attribute("key").Value,
+                                    x.Attribute("value").Value)).ToList();
+
+            var feature = new Feature
+            {
+                Name = featureNode.Attribute("name").Value,
+                Enabled = toBool(featureNode.Attribute("enabled").Value),
+                Properties = properties
+            };
+            
+            return feature;
         }
     }
 

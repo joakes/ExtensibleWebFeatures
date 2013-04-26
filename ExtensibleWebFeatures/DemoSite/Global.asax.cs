@@ -3,6 +3,8 @@ using System.Web;
 
 namespace DemoSite
 {
+    using System.Web.Optimization;
+    using App_Start;
     using Infrastructure;
 
     public class Global : HttpApplication
@@ -11,6 +13,7 @@ namespace DemoSite
         protected void Application_Start(object sender, EventArgs e)
         {
             System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new AssemblyResourceProvider());
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
         protected void Session_Start(object sender, EventArgs e)

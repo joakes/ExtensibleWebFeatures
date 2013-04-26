@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Features\AdBannerFeature.cs" />
     <Compile Include="Infrastructure\FindWebFeature.cs" />
+    <Compile Include="Infrastructure\ScriptReference.cs" />
     <Compile Include="Presenters\BasePresenter.cs" />
     <Compile Include="Features\BaseWebFeature.cs" />
     <Compile Include="Infrastructure\FeatureConfiguration.cs" />
@@ -83,17 +84,18 @@
       <DependentUpon>WebChat.ascx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\WebFeatureExportAttribute.cs" />
+    <Compile Include="Views\IWebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UserControls\WebChat.ascx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UserControls\AdBanner.ascx" />
+    <EmbeddedResource Include="UserControls\webChat.js" />
     <Content Include="WebFeatures.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

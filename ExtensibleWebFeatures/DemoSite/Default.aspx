@@ -1,15 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DemoSite.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" MasterPageFile="Master.master" Inherits="DemoSite.Default" %>
 
-<!DOCTYPE html>
+<asp:Content runat="server" ContentPlaceHolderID="Content">
+    
+    <h1>Features</h1>
+    <asp:PlaceHolder runat="server" ID="Menu"></asp:PlaceHolder>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <h1>Features</h1>
-        <asp:PlaceHolder runat="server" ID="Menu"></asp:PlaceHolder>
-    </form>
-</body>
-</html>
+</asp:Content>
