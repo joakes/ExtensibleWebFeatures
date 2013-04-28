@@ -135,6 +135,8 @@
     <Content Include="packages.config" />
     <Content Include="Master.master" />
     <Content Include="Content\styles.less" />
+    <Content Include="Content\start.less" />
+    <Content Include="Content\webfeatures.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,1 +1,1 @@
-﻿alert('web chat loaded!');
+﻿console.log('web chat loaded!');

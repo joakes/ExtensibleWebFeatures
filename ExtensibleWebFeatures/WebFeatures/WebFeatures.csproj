@@ -92,6 +92,7 @@
   <ItemGroup>
     <EmbeddedResource Include="UserControls\AdBanner.ascx" />
     <EmbeddedResource Include="UserControls\webChat.js" />
+    <EmbeddedResource Include="UserControls\webChat.less" />
     <Content Include="WebFeatures.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
