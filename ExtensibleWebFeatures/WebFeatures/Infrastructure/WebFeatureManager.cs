@@ -51,5 +51,13 @@
 
             return featuresThatAreOnThisPageAndThisSection;
         }
+
+        public static bool IsResourceRequiredForActiveFeature(string resourceName)
+        {
+            return container.GetExports<IWebFeature, IFeatureMetadata>()
+                            .Where(m => featureConfig.IsFeatureEnabled(m.Metadata.FeatureName))
+                            .Select(f => f.Value)
+                            .Any(f => f.ResourceDependencies.Contains(resourceName));
+        }
     }
 }

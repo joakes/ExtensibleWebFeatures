@@ -1,6 +1,6 @@
 namespace WebFeatures.Features
 {
-    using WebFeatures.Infrastructure;
+    using Infrastructure;
 
     [WebFeatureExport("AdBanner")]
     public class AdBannerFeature : BaseWebFeature
@@ -9,6 +9,7 @@ namespace WebFeatures.Features
         {
             Pages.Add("Default.aspx");
             PlaceHolderName = "Menu";
+            AddResourceDependency("adBanner.less");
         }
     }
 }

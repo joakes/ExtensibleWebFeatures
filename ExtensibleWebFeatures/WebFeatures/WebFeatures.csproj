@@ -93,9 +93,18 @@
     <EmbeddedResource Include="UserControls\AdBanner.ascx" />
     <EmbeddedResource Include="UserControls\webChat.js" />
     <EmbeddedResource Include="UserControls\webChat.less" />
+    <Content Include="UserControls\adBanner.css">
+      <DependentUpon>adBanner.less</DependentUpon>
+    </Content>
+    <Content Include="UserControls\adBanner.min.css">
+      <DependentUpon>adBanner.less</DependentUpon>
+    </Content>
     <Content Include="WebFeatures.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserControls\adBanner.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

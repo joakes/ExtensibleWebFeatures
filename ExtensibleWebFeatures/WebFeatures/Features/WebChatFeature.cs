@@ -1,6 +1,6 @@
 namespace WebFeatures.Features
 {
-    using WebFeatures.Infrastructure;
+    using Infrastructure;
 
     [WebFeatureExport("WebChat")]
     public class WebChatFeature : BaseWebFeature
@@ -9,6 +9,7 @@ namespace WebFeatures.Features
         {
             Pages.Add("Default.aspx");
             PlaceHolderName = "Menu";
+            AddResourceDependency("webChat.less");
         }
     }
 }

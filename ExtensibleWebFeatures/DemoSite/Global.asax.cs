@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using WebFeatures.Features;
 
 namespace DemoSite
 {
@@ -13,6 +14,7 @@ namespace DemoSite
         protected void Application_Start(object sender, EventArgs e)
         {
             System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new AssemblyResourceProvider());
+            BundleExtensions.CopyLessFiles(typeof(BaseWebFeature), "~/Content/", "webfeatures.less");
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 

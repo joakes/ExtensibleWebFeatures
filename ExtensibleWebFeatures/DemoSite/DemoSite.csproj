@@ -102,7 +102,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\foo.js" />
     <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\webfeatures.css">
+      <DependentUpon>webfeatures.less</DependentUpon>
+    </Content>
+    <Content Include="Content\webfeatures.min.css">
+      <DependentUpon>webfeatures.less</DependentUpon>
+    </Content>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
   </ItemGroup>

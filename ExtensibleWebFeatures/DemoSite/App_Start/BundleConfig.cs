@@ -1,44 +1,44 @@
-﻿namespace DemoSite.App_Start
+﻿using System.Text;
+using WebFeatures.Infrastructure;
+
+namespace DemoSite.App_Start
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Optimization;
-    using WebFeatures.Features;
 
     public static class BundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new LessBundle("~/Content/less")
-                .Include("~/Content/start.less")
-                .Include(typeof(BaseWebFeature), "~/Content/", "webfeatures.less"));
+            bundles.Add(new LessBundle("~/Content/less").Include("~/Content/start.less"));
         }
     }
 
     public static class BundleExtensions
     {
-        public static Bundle Include(this Bundle bundle, Type type, string directoryVirtualPath, string importsLessFile)
+        public static void CopyLessFiles(Type type, string directoryVirtualPath, string importsLessFile)
         {
             var lessFileNames = CopyLessResourcesToServer(type, directoryVirtualPath);
-            AppendLessFilesToStartScript(directoryVirtualPath, importsLessFile, lessFileNames);
-            return bundle;
+            AppendLessFilesToImportsScript(directoryVirtualPath, importsLessFile, lessFileNames);
         }
 
         private static IEnumerable<string> CopyLessResourcesToServer(Type type, string directoryVirtualPath)
         {
             var assembly = type.Assembly;
-            var resourceNames = assembly.GetManifestResourceNames().Where(res => res.EndsWith(".less"));
+            var resourceNames = assembly.GetManifestResourceNames()
+                                        .Where(WebFeatureManager.IsResourceRequiredForActiveFeature)
+                                        .ToList();
 
-            var dir = BundleTable.MapPathMethod(directoryVirtualPath);
-            if (!Directory.Exists(dir))
+            var serverDir = BundleTable.MapPathMethod(directoryVirtualPath);
+            if (!Directory.Exists(serverDir))
             {
-                Directory.CreateDirectory(dir);
+                Directory.CreateDirectory(serverDir);
             }
 
-            var lessFileNames = resourceNames as string[] ?? resourceNames.ToArray();
-            foreach (var resourceName in lessFileNames)
+            foreach (var resourceName in resourceNames)
             {
                 var path = Path.Combine(directoryVirtualPath, resourceName);
                 var fullPath = BundleTable.MapPathMethod(path);
@@ -53,21 +53,21 @@
                 }
             }
 
-            return lessFileNames;
+            return resourceNames;
         }
 
-        private static void AppendLessFilesToStartScript(string directoryVirtualPath, string importsLessFile, IEnumerable<string> lessFileNames)
+        private static void AppendLessFilesToImportsScript(string directoryVirtualPath, string importsLessFile, IEnumerable<string> lessFileNames)
         {
             var virtualPath = Path.Combine(directoryVirtualPath, importsLessFile);
             var serverPath = BundleTable.MapPathMethod(virtualPath);
 
-            using (var writer = File.AppendText(serverPath))
+            var imports = new StringBuilder();
+            foreach (var lessFile in lessFileNames)
             {
-                foreach (var lessFile in lessFileNames)
-                {
-                    writer.WriteLine("@import \"{0}\";", lessFile);
-                }
+                imports.AppendFormat("@import \"{0}\";{1}", lessFile, Environment.NewLine);
             }
+
+            File.WriteAllText(serverPath, imports.ToString());
         }
     }
 }

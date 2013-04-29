@@ -4,4 +4,5 @@
 <h2>Web Chat</h2>
 <a ID="ChatAnchor" runat="server" href="#" target="_blank">Chat now!</a>
 
-<custom:ScriptReference runat="server" Script="webChat.js" />
+<custom:ScriptReference runat="server" IsEmbedded="True" Path="webChat.js" />
+<custom:ScriptReference runat="server" Path="~/Scripts/foo.js" />
