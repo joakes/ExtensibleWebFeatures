@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <features>
+  <menugroups>
+    <group name="Accounts" position="0" cssClass="accounts" />
+    <group name="Transfers" position="1" cssClass="transfers" />
+    <group name="BPay" position="2" cssClass="bpay" />
+    <group name="Personal Settings" position="3" cssClass="settings" />
+  </menugroups>
   <feature name="WebChat" enabled="True">
       <property key="Url" value="http://www.google.com.au" />
+      <menu group="Accounts" name="Balances" position="2" cssClass="balances" />
   </feature>
-  <feature name="AdBanner" enabled="True" />
+  <feature name="AdBanner" enabled="True">
+    <menu group="Transfers" name="Transfers" position="1" cssClass="transfers" />
+  </feature>
 </features>

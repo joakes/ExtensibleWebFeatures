@@ -2,6 +2,7 @@
 
 namespace DemoSite
 {
+    using Infrastructure;
     using WebFeatures.Infrastructure;
 
     public partial class Default : System.Web.UI.Page
@@ -15,6 +16,8 @@ namespace DemoSite
                 var webChatControl = LoadControl(webFeature.ResourcePath);
                 Menu.Controls.Add(webChatControl);   
             }
+
+            var verticalMenu = new VerticalMenuBuilder().BuildMenu();
         }
     }
 }

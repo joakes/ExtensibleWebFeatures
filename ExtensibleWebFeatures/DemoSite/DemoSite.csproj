@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Infrastructure\AssemblyResourceProvider.cs" />
     <Compile Include="Infrastructure\AssemblyResourceVirtualFile.cs" />
+    <Compile Include="Infrastructure\MenuBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

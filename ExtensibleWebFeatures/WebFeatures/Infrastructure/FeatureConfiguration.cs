@@ -52,7 +52,7 @@
             }
         }
 
-        private FeatureConfig InitialiseFeatureConfigFromXml()
+        public FeatureConfig InitialiseFeatureConfigFromXml()
         {
             var config = new FeatureConfig();
             var configFilePath = HttpContext.Current.Server.MapPath(@"./bin/" + _configFileName);
@@ -62,9 +62,26 @@
             var features = from feature in root.Elements("feature")
                            let props = feature.Descendants("property")
                            select CreateFeatureFromXDoc(feature, props);
-            
+
+            var menuGroups = root.Element("menugroups")
+                                 .Elements("group")    
+                                 .Select(CreateMenuGroupFromElement);
+
             config.Features = features.ToList();
+            config.MenuGroups = menuGroups.ToList();
             return config;
+        }
+
+        private MenuGroup CreateMenuGroupFromElement(XElement grp)
+        {
+            var menuGroup = new MenuGroup
+                                {
+                                    CssClass = grp.Attribute("cssClass").Value,
+                                    Name = grp.Attribute("name").Value,
+                                    Position = int.Parse(grp.Attribute("position").Value)
+                                };
+
+            return menuGroup;
         }
 
         private Feature CreateFeatureFromXDoc(XElement featureNode, IEnumerable<XElement> propertiesNode)
@@ -84,10 +101,24 @@
             {
                 Name = featureNode.Attribute("name").Value,
                 Enabled = toBool(featureNode.Attribute("enabled").Value),
-                Properties = properties
+                Properties = properties,
+                MenuItem = GetMenuItems(featureNode.Element("menu"))
             };
             
             return feature;
+        }
+
+        private MenuItem GetMenuItems(XElement element)
+        {
+            var item = new MenuItem
+            {
+                CssClass = element.Attribute("cssClass").Value,
+                Name = element.Attribute("name").Value,
+                Position = int.Parse(element.Attribute("position").Value),
+                Group = element.Attribute("group").Value
+            };
+
+            return item;
         }
     }
 
@@ -96,8 +127,10 @@
         public FeatureConfig()
         {
             Features = new List<Feature>();
+            MenuGroups = new List<MenuGroup>();
         }
 
+        public List<MenuGroup> MenuGroups { get; set; }
         public List<Feature> Features  { get; set; }
     }
 
@@ -110,7 +143,21 @@
 
         public string Name { get; set; }
         public bool Enabled { get; set; }
+        public MenuItem MenuItem { get; set; }
         public List<KeyValuePair<string, string>> Properties { get; set; }
+    }
+
+    public class MenuBase
+    {
+        public string Name { get; set; }
+        public int Position { get; set; }
+        public string CssClass { get; set; }
+    }
+    
+    public class MenuGroup : MenuBase { }
+    public class MenuItem : MenuBase
+    {
+        public string Group { get; set; }
     }
 
     public interface IFeatureConfiguration
