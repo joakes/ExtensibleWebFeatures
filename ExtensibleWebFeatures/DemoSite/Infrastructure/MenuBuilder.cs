@@ -1,6 +1,5 @@
 ﻿namespace DemoSite.Infrastructure
 {
-    using System;
     using System.Collections.Generic;
     using System.Text;
     using WebFeatures.Infrastructure;
@@ -8,22 +7,28 @@
 
     public class VerticalMenuBuilder : MenuBuilder
     {
-        protected override sealed Func<MenuGroup, string> VisitMenuGroup { get; set; }
-        protected override sealed Func<MenuItem, string> VisitMenuItem { get; set; }
         protected override sealed string MenuWrapFormatString { get; set; }
 
         public VerticalMenuBuilder()
         {
             MenuWrapFormatString = "<div>{0}</div>";
-            VisitMenuItem = item => string.Format("<li class=\"{0}\">{1}</li>", item.CssClass, item.Name);
-            VisitMenuGroup = @group => string.Format("<p>{0}</p><ul class=\"{1}\">{2}</ul>", @group.Name, @group.CssClass, "{0}");
+        }
+
+        protected override string VisitMenuGroup(MenuGroup menuGroup)
+        {
+            return string.Format("<p>{0}</p><ul class=\"{1}\">{2}</ul>", menuGroup.Name, menuGroup.CssClass, "{0}");
+        }
+
+        protected override string VisitMenuItem(MenuItem menuItem)
+        {
+            return string.Format("<li class=\"{0}\">{1}</li>", menuItem.CssClass, menuItem.Name);
         }
     }
 
     public abstract class MenuBuilder
     {
-        protected abstract Func<MenuGroup, string> VisitMenuGroup { get; set; }
-        protected abstract Func<MenuItem, string> VisitMenuItem { get; set; }
+        protected abstract string VisitMenuGroup(MenuGroup menuGroup);
+        protected abstract string VisitMenuItem(MenuItem menuItem);
         protected abstract string MenuWrapFormatString { get; set; }
 
         public string BuildMenu()
